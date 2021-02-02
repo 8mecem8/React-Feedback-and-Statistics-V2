@@ -1,3 +1,7 @@
+
+
+
+
 const anecdotesAtStart = [
   'If it hurts, do it more often',
   'Adding manpower to a late software project makes it later!',
@@ -17,8 +21,7 @@ const asObject = (anecdote) => {
   }
 }
 
-const initialState = anecdotesAtStart.map(asObject)
-
+export const initialState = anecdotesAtStart.map(asObject)
 
 
 
@@ -26,47 +29,30 @@ const initialState = anecdotesAtStart.map(asObject)
 
 
 export const voteUpOf = (id) => {
-  return {
-      type: 'VOTEUP',
-      data: id
-
-  }
-
-}
-
-
+  return {type: 'VOTEUP',data: id}}
 
 
 
 
 const reducer = (state = initialState, action) => {
   //console.log('state now: ', Object.values(state))
- // console.log('action', action.id)
+  //console.log('action', action)
 
   switch(action.type){
 
     case 'VOTEUP':
-       let fAnec = state.find(at =>  at.id === action.data)
-         fAnec = {
-          ...fAnec,
-           votes: fAnec.votes + 1
-         }                                                                                        // content: fAnec.content,id: fAnec.id,
+           let fAnec = state.find(at =>  at.id === action.data)
+            fAnec = {...fAnec,votes: fAnec.votes + 1}                                                                                        // content: fAnec.content,id: fAnec.id,
+              
+          return state.map(at => at.id !== action.data ? at : fAnec)
+    case 'ADDANEC':
 
-       return state.map(at => at.id !== action.data ? at : fAnec)
-     case 'ADDANEC':
-
-let att = getId()
-
-         
-      let  addNewCon = {
-          content: action.data,
-          id:  att  === state.map(at => at.id) ? getId() : att ,
-          votes: 0
-        }
-console.log(addNewCon)
-       return state.concat(addNewCon)
+           let att = getId()
+           let  addNewCon = {content: action.data,id:  att  === state.map(at => at.id) ? getId() : att ,votes: 0}
+           console.log(addNewCon)
+           return state.concat(addNewCon)
     default:
-  return state
+           return state
   }
 }
 
