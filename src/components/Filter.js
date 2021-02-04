@@ -17,7 +17,8 @@ const dispatch = useDispatch()
 
   }
   const style = {
-    marginBottom: 10
+    marginBottom: 10,
+    
   }
  
  //console.log(handle)
